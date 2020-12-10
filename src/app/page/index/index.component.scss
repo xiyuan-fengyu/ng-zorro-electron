@@ -1,0 +1,19 @@
+nz-header {
+  height: 50px;
+  padding: 0 24px;
+}
+
+nz-layout.main {
+  height: calc(100vh - 50px);
+}
+
+nz-layout.main nz-sider {
+  background: white;
+}
+
+.logo {
+  float: left;
+  color: white;
+  font-weight: bold;
+  line-height: 50px;
+}

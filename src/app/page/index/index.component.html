@@ -1,0 +1,20 @@
+<nz-layout>
+  <nz-header>
+    <div class="logo">ng-zorro electron</div>
+  </nz-header>
+  <nz-layout class="main">
+    <nz-sider>
+      <ul nz-menu nzMode="inline" class="sider-menu">
+        <li *ngFor="let module of modules" nz-menu-item [nzSelected]="curModule == module.url">
+          <a [routerLink]="module.url">
+            <i nz-icon [nzType]="module.icon"></i>
+            {{module.label}}
+          </a>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
