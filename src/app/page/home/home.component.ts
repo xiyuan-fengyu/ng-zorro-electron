@@ -35,19 +35,15 @@ export class HomeComponent implements OnInit {
 
   }
 
-  private updateProgress(percent: number, status: "active" | "success") {
-    this.progressInfo.percent = percent;
-    this.progressInfo.status = status;
-  }
-
   async test(msg: string, notifyProgress?: boolean) {
     if (notifyProgress) {
-      this.updateProgress(0, "active");
+      this.progressInfo.percent = 0;
+      this.progressInfo.status = "active";
     }
     const res = await this.electronService.ipcCall("test", msg, notifyProgress ? progress => {
-      this.updateProgress(progress, "active");
+      this.progressInfo.percent = progress;
     } : null);
-    this.updateProgress(100, "success");
+    this.progressInfo.status = "success";
     this.messageService.create("success", res);
   }
 
