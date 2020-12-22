@@ -1,1 +1,15 @@
-<h1>home works!</h1>
+<div class="container">
+  <div nz-row class="mt12">
+    <div nz-col nzSpan="4" style="text-align: center">
+      <button (click)="test('hi')" nz-button nzType="primary">test</button>
+    </div>
+  </div>
+  <div nz-row class="mt12">
+    <div nz-col nzSpan="4" style="text-align: center">
+      <button (click)="test('hello', true)" nz-button nzType="primary">test with notify</button>
+    </div>
+    <div nz-col nzSpan="20">
+      <nz-progress #theProgress [nzPercent]="progressInfo.percent" [nzStatus]="progressInfo.status"></nz-progress>
+    </div>
+  </div>
+</div>

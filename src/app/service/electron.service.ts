@@ -17,7 +17,6 @@ export class ElectronService {
   childProcess: typeof childProcess;
   fs: typeof fs;
   path: typeof path;
-  workplace: string;
 
   get isElectron(): boolean {
     return !!(window && (window as any).process && (window as any).process.type);
@@ -35,15 +34,7 @@ export class ElectronService {
       this.fs = (window as any).require('fs');
       this.path = (window as any).require('path');
 
-      this.initWorkplace();
       this.initIpcRender();
-    }
-  }
-
-  private initWorkplace() {
-    this.workplace = this.remote.app.getAppPath() + "/workplace";
-    if (!this.fs.existsSync(this.workplace)) {
-      this.fs.mkdirSync(this.workplace, {recursive: true});
     }
   }
 

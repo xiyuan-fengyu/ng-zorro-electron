@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ElectronService} from "../../service/electron.service";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {NzProgressComponent} from "ng-zorro-antd/progress";
 
 @Component({
   selector: 'app-home',
@@ -8,23 +10,48 @@ import {ElectronService} from "../../service/electron.service";
 })
 export class HomeComponent implements OnInit {
 
+  public progressInfo = {
+    percent: 0,
+    status: "active"
+  };
+
+  @ViewChild("theProgress") set theProgress(ele: NzProgressComponent) {
+    if (!ele["_forceRefresh"]) {
+      ele["_forceRefresh"] = setInterval(() => {
+        // 触发progress强制更新（NzProgressComponent有bug，很可能不会刷新）
+        ele.nzPercent = this.progressInfo.percent;
+        ele.nzStatus = this.progressInfo.status as ("active" | "success");
+      }, 100);
+      ele.ngOnDestroy = () => {
+        clearInterval(ele["_forceRefresh"]);
+      };
+    }
+  }
+
   constructor(
-    private electronService: ElectronService
+    private electronService: ElectronService,
+    private messageService: NzMessageService
   ) {
 
   }
 
-  async ngOnInit() {
-    console.log("test");
-    const res0 = await this.electronService.ipcCall("test", "hi");
-    console.log(res0);
+  private updateProgress(percent: number, status: "active" | "success") {
+    this.progressInfo.percent = percent;
+    this.progressInfo.status = status;
+  }
 
-    console.log("test with notify");
-    // the notify callback must be the last parameter of ipcCall
-    const res1 = await this.electronService.ipcCall("test", "hello", progress => {
-      console.log("progress: " + progress);
-    });
-    console.log(res1);
+  async test(msg: string, notifyProgress?: boolean) {
+    if (notifyProgress) {
+      this.updateProgress(0, "active");
+    }
+    const res = await this.electronService.ipcCall("test", msg, notifyProgress ? progress => {
+      this.updateProgress(progress, "active");
+    } : null);
+    this.updateProgress(100, "success");
+    this.messageService.create("success", res);
+  }
+
+  async ngOnInit() {
   }
 
 }
