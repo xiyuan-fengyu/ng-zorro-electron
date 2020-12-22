@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ElectronService} from "../../service/electron.service";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private electronService: ElectronService
+  ) {
 
-  ngOnInit(): void {
+  }
+
+  async ngOnInit() {
+    console.log("test");
+    const res0 = await this.electronService.ipcCall("test", "hi");
+    console.log(res0);
+
+    console.log("test with notify");
+    // the notify callback must be the last parameter of ipcCall
+    const res1 = await this.electronService.ipcCall("test", "hello", progress => {
+      console.log("progress: " + progress);
+    });
+    console.log(res1);
   }
 
 }

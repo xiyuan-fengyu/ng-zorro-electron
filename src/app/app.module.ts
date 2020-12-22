@@ -10,8 +10,20 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 // ng-zorro
 import {NzLayoutModule} from 'ng-zorro-antd/layout';
-import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzMenuModule} from "ng-zorro-antd/menu";
+import {NzGridModule} from "ng-zorro-antd/grid";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzMessageModule} from "ng-zorro-antd/message";
+import {NzUploadModule} from 'ng-zorro-antd/upload';
+import {NzListModule} from 'ng-zorro-antd/list';
+import {NzPaginationModule} from 'ng-zorro-antd/pagination';
+import {NzCardModule} from 'ng-zorro-antd/card';
+import {NzStepsModule} from "ng-zorro-antd/steps";
+import {NzProgressModule} from "ng-zorro-antd/progress";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -40,8 +52,20 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
 
     NzLayoutModule,
+    NzGridModule,
     NzMenuModule,
-    NzIconModule
+    NzFormModule,
+    NzMessageModule,
+    NzButtonModule,
+    NzCheckboxModule,
+    NzInputModule,
+    NzIconModule,
+    NzUploadModule,
+    NzCardModule,
+    NzListModule,
+    NzPaginationModule,
+    NzStepsModule,
+    NzProgressModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

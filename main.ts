@@ -1,6 +1,9 @@
 import { app, BrowserWindow, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import {IpcMainController} from "./server-src/IpcMainController";
+
+IpcMainController.init();
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
