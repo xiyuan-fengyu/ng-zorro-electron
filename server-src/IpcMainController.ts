@@ -1,5 +1,8 @@
 import {ipcMain} from 'electron';
 
+/**
+ * server-src 中要使用npm上的第三方依赖包，需要在 package.json 的 dependencies 下添加依赖，注意不是 devDependencies
+ */
 export class IpcMainController {
 
   private static inited = false;
